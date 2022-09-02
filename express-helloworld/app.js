@@ -5,6 +5,11 @@ app.get('/', function (req, res) {
   res.send('We are all happy! \n');
 });
 
+app.get('/test', function (req, res) {
+  res.send(process.env.TEST123);
+  res.send(' \n');
+});
+
 app.get('/mars', function(req, res) {
   res.send('Hello Mars!\n');
 });

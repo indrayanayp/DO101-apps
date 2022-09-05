@@ -1,5 +1,5 @@
 var express = require('express');
-app = express();
+const app = express();
 
 app.get('/', function (req, res) {
   res.send('We are all happy! \n');
@@ -14,16 +14,34 @@ app.get('/mars', function(req, res) {
   res.send('Hello Mars!\n');
 });
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
-  
+const server = app.listen(8080, () => console.log('Running…'));
+
+setInterval(() => server.getConnections(
+    (err, connections) => console.log(`${connections} connections currently open`)
+), 1000);
+
+process.on('SIGTERM', shutDown);
+process.on('SIGINT', shutDown);
+
+let connections = [];
+
+server.on('connection', connection => {
+    connections.push(connection);
+    connection.on('close', () => connections = connections.filter(curr => curr !== connection));
 });
 
-const server = app.listen(8080)
+function shutDown() {
+    console.log('Received kill signal, shutting down gracefully');
+    server.close(() => {
+        console.log('Closed out remaining connections');
+        process.exit(0);
+    });
 
-process.on('SIGTERM', () => {
-  debug('SIGTERM signal received: closing HTTP server')
-  server.close(() => {
-    debug('HTTP server closed')
-  })
-})
+    setTimeout(() => {
+        console.error('Could not close connections in time, forcefully shutting down');
+        process.exit(1);
+    }, 10000);
+
+    connections.forEach(curr => curr.end());
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 5000);
+}

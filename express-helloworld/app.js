@@ -16,5 +16,13 @@ app.get('/mars', function(req, res) {
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
+  
 });
+
+process.on('SIGTERM', () => {
+  debug('SIGTERM signal received: closing HTTP server')
+  server.close(() => {
+    debug('HTTP server closed')
+  })
+})
 

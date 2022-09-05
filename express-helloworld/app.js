@@ -19,7 +19,7 @@ app.listen(8080, function () {
   
 });
 
-const server = app.listen(port)
+const server = app.listen(8080)
 
 process.on('SIGTERM', () => {
   debug('SIGTERM signal received: closing HTTP server')

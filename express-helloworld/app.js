@@ -7,7 +7,6 @@ app.get('/', function (req, res) {
 
 app.get('/test', function (req, res) {
   res.send(process.env.TEST123);
-  res.send(' \n');
 });
 
 app.get('/mars', function(req, res) {

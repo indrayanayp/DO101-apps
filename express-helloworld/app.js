@@ -14,7 +14,7 @@ app.get('/mars', function(req, res) {
   res.send('Hello Mars!\n');
 });
 
-/*const server = app.listen(8080, () => console.log('Running…'));
+const server = app.listen(8080, () => console.log('Running…'));
 
 setInterval(() => server.getConnections(
     (err, connections) => console.log(`${connections} connections currently open`)
@@ -43,18 +43,5 @@ function shutDown() {
     }, 10000);
 
     connections.forEach(curr => curr.end());
-    setTimeout(() => connections.forEach(curr => curr.destroy()), 5000);
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 10000);
 }
-*/
-
-const GracefulShutdownManager = require('@moebius/http-graceful-shutdown').GracefulShutdownManager;
-
-const server = app.listen(8080);
-
-const shutdownManager = new GracefulShutdownManager(server);
-
-process.on('SIGTERM', () => {
-  shutdownManager.terminate(() => {
-    console.log('Server is gracefully terminated');
-  });
-});

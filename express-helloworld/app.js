@@ -1,6 +1,5 @@
 var express = require('express');
 const app = express();
-const isShutdown = new Boolean(false);
 
 app.get('/', function (req, res) {
   res.send('We are all happy! \n');
@@ -12,9 +11,6 @@ app.get('/test', function (req, res) {
 
 app.get('/mars', function(req, res) {
   res.send('Hello Mars!\n');
-  if (isShutdown){
-    res.writeHead(500);
-  }
 });
 
 const server = app.listen(8080, () => console.log('Running…'));
@@ -34,7 +30,6 @@ server.on('connection', connection => {
 });
 
 function shutDown() {
-    isShutdown = true;
     console.log('Received kill signal, shutting down gracefully');
     server.close(() => {
         console.log('Closed out remaining connections');

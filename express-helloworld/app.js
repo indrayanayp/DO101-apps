@@ -21,7 +21,6 @@ setInterval(() => server.getConnections(
 
 process.on('SIGTERM', shutDown);
 process.on('SIGINT', shutDown);
-process.on('SIGKILL', shutDown);
 
 let connections = [];
 

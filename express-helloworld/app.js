@@ -33,7 +33,7 @@ function shutDown() {
     console.log('Received kill signal, shutting down gracefully');
     server.close(() => {
         console.log('Closed out remaining connections');
-        //process.exit(0);
+        process.exit(0);
     });
 
     setTimeout(() => {

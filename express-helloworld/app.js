@@ -1,6 +1,6 @@
 var express = require('express');
 const app = express();
-const serverStoppers = require('./serverStoppers')
+const serverStoppers = require('./serverStoppers');
 
 app.get('/', function (req, res) {
   res.send('We are all happy! \n');

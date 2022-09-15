@@ -33,6 +33,7 @@ function shutDown() {
     console.log('Received kill signal, shutting down gracefully');
     server.close(() => {
         console.log('Closed out remaining connections');
+        //process.exit(0) is disabled as it prints error whenever a pod is terminated
         //process.exit(0);
     });
 

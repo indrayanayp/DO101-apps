@@ -32,12 +32,11 @@ server.on('connection', connection => {
 
 function shutDown() {
     console.log('Received kill signal, shutting down gracefully');
-    execSync('sleep 10');
+    execSync('sleep 30');
     server.close(() => {
         console.log('Closed out remaining connections');
-        execSync('sleep 10');
         //process.exit(0) is disabled as it prints error whenever a pod is terminated
-        process.exit(0);
+        //process.exit(0);
     });
 
     setTimeout(() => {

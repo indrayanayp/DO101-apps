@@ -1,4 +1,5 @@
 var express = require('express');
+const {execSync} = require('child_process');
 const app = express();
 
 app.get('/', function (req, res) {
@@ -32,6 +33,7 @@ server.on('connection', connection => {
 function shutDown() {
     console.log('Received kill signal, shutting down gracefully');
     server.close(() => {
+        execSync('sleep 10');
         console.log('Closed out remaining connections');
         //process.exit(0) is disabled as it prints error whenever a pod is terminated
         //process.exit(0);

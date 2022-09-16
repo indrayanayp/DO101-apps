@@ -35,15 +35,16 @@ function shutDown() {
     execSync('sleep 10');
     server.close(() => {
         console.log('Closed out remaining connections');
+        execSync('sleep 10');
         //process.exit(0) is disabled as it prints error whenever a pod is terminated
-        //process.exit(0);
+        process.exit(0);
     });
 
     setTimeout(() => {
         console.error('Could not close connections in time, forcefully shutting down');
-        //process.exit(1);
-    }, 10000);
+        process.exit(1);
+    }, 30000);
 
     connections.forEach(curr => curr.end());
-    setTimeout(() => connections.forEach(curr => curr.destroy()), 10000);
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 30000);
 }

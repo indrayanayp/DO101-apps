@@ -34,11 +34,9 @@ function shutDown() {
     console.log('Received kill signal, shutting down gracefully');
     server.close(() => {
         console.log('Closed out remaining connections');
-        execSync('sleep 15');
         //process.exit(0) is disabled as it prints error whenever a pod is terminated
         //process.exit(0);
     });
-    execSync('sleep 30');
 
     setTimeout(() => {
         console.error('Could not close connections in time, forcefully shutting down');

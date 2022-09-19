@@ -1,5 +1,4 @@
 var express = require('express');
-const {execSync} = require('child_process');
 const app = express();
 
 app.get('/', function (req, res) {
@@ -41,8 +40,8 @@ function shutDown() {
     setTimeout(() => {
         console.error('Could not close connections in time, forcefully shutting down');
         process.exit(1);
-    }, 30000);
+    }, 10000);
 
     connections.forEach(curr => curr.end());
-    setTimeout(() => connections.forEach(curr => curr.destroy()), 30000);
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 10000);
 }

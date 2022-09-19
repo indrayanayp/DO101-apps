@@ -50,5 +50,5 @@ function shutDown() {
     }, 20000);
 
     connections.forEach(curr => curr.end());
-    setTimeout(() => connections.forEach(curr => curr.destroy()), 20000);
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 30000);
 }

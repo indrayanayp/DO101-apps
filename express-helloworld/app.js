@@ -34,7 +34,7 @@ function shutDown() {
     server.close(() => {
         console.log('Closed out remaining connections');
         //process.exit(0) is disabled as it prints error whenever a pod is terminated
-        //process.exit(0);
+        process.exit(0);
     });
 
     setTimeout(() => {

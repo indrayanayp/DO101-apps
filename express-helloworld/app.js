@@ -2,7 +2,7 @@ var express = require('express');
 const app = express();
 
 app.get('/', function (req, res) {
-  res.send('We are all happy 3! \n');
+  res.send('We are all happy versi 1! \n');
 });
 
 app.get('/test', function (req, res) {
@@ -20,7 +20,7 @@ setInterval(() => server.getConnections(
 ), 1000);
 
 process.on('SIGTERM', shutDown);
-process.on('SIGKILL', shutDown);
+process.on('SIGINT', shutDown);
 
 let connections = [];
 

@@ -19,8 +19,8 @@ setInterval(() => server.getConnections(
     (err, connections) => console.log(`${connections} connections currently open`)
 ), 1000);
 
-process.on('SIGTERM', shutDown);
-process.on('SIGINT', shutDown);
+//process.on('SIGTERM', shutDown);
+//process.on('SIGINT', shutDown);
 
 let connections = [];
 
